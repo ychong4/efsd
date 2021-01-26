@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 now = timezone.now()
 def home(request):
@@ -17,8 +18,17 @@ def home(request):
 @login_required
 def customer_list(request):
     customer = Customer.objects.filter(created_date__lte=timezone.now())
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(customer, 5)
+    try:
+        customers = paginator.page(page)
+    except PageNotAnInteger:
+        customers = paginator.page(1)
+    except EmptyPage:
+        customers = paginator.page(paginator.num_pages)
     return render(request, 'portfolio/customer_list.html',
-                 {'customers': customer})
+                 {'customers': customers})
 
 @login_required
 def customer_edit(request, pk):
@@ -48,7 +58,16 @@ def customer_delete(request, pk):
 @login_required
 def stock_list(request):
    stocks = Stock.objects.all()
-   return render(request, 'portfolio/stock_list.html', {'stocks': stocks})
+   page = request.GET.get('page', 1)
+
+   paginator = Paginator(stocks, 5)
+   try:
+       stock = paginator.page(page)
+   except PageNotAnInteger:
+       stock = paginator.page(1)
+   except EmptyPage:
+       stock = paginator.page(paginator.num_pages)
+   return render(request, 'portfolio/stock_list.html', {'stocks': stock})
 
 @login_required
 def stock_new(request):
@@ -56,7 +75,7 @@ def stock_new(request):
        form = StockForm(request.POST)
        if form.is_valid():
            stock = form.save(commit=False)
-           stock.created_date = timezone.now()
+           stock.purchased_date = timezone.now()
            stock.save()
            stocks = Stock.objects.all()
            return render(request, 'portfolio/stock_list.html',
@@ -92,7 +111,16 @@ def stock_delete(request, pk):
 @login_required
 def investment_list(request):
    investments = Investment.objects.all()
-   return render(request, 'portfolio/investment_list.html', {'investments': investments})
+   page = request.GET.get('page', 1)
+
+   paginator = Paginator(investments, 5)
+   try:
+       investment = paginator.page(page)
+   except PageNotAnInteger:
+       investment = paginator.page(1)
+   except EmptyPage:
+       investment = paginator.page(paginator.num_pages)
+   return render(request, 'portfolio/investment_list.html', {'investments': investment})
 
 @login_required
 def investment_new(request):
