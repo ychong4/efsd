@@ -47,7 +47,7 @@ def customer_delete(request, pk):
 
 @login_required
 def stock_list(request):
-   stocks = Stock.objects.filter(purchase_date__lte=timezone.now())
+   stocks = Stock.objects.all()
    return render(request, 'portfolio/stock_list.html', {'stocks': stocks})
 
 @login_required
@@ -58,7 +58,7 @@ def stock_new(request):
            stock = form.save(commit=False)
            stock.created_date = timezone.now()
            stock.save()
-           stocks = Stock.objects.filter(purchase_date__lte=timezone.now())
+           stocks = Stock.objects.all()
            return render(request, 'portfolio/stock_list.html',
                          {'stocks': stocks})
    else:
@@ -91,7 +91,7 @@ def stock_delete(request, pk):
 
 @login_required
 def investment_list(request):
-   investments = Investment.objects.filter(acquired_date__lte=timezone.now())
+   investments = Investment.objects.all()
    return render(request, 'portfolio/investment_list.html', {'investments': investments})
 
 @login_required
@@ -102,9 +102,9 @@ def investment_new(request):
            investment = form.save(commit=False)
            investment.created_date = timezone.now()
            investment.save()
-           investment = Investment.objects.filter(acquired_date__lte=timezone.now())
+           investments = Investment.objects.all()
            return render(request, 'portfolio/investment_list.html',
-                         {'investment': investment})
+                         {'investments': investments})
    else:
        form = InvestForm()
        # print("Else")
@@ -120,8 +120,8 @@ def investment_edit(request, pk):
            # stock.customer = stock.id
            investment.updated_date = timezone.now()
            investment.save()
-           investment = Investment.objects.filter(acquired_date__lte=timezone.now())
-           return render(request, 'portfolio/investment_list.html', {'investment': investment})
+           investments = Investment.objects.filter(acquired_date__lte=timezone.now())
+           return render(request, 'portfolio/investment_list.html', {'investments': investments})
    else:
        # print("else")
        form = InvestForm(instance=investment)
