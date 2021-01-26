@@ -60,7 +60,7 @@ class Stock(models.Model):
     purchase_date = models.DateField(default=timezone.now, blank=True, null=True)
 
     def created(self):
-        self.recent_date = timezone.now()
+        self.purchase_date = timezone.now()
         self.save()
 
     def __str__(self):
