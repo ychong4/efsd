@@ -41,9 +41,9 @@
                     <td>{{ mutualFund.acquired_date }}</td>
                     <td>{{ mutualFund.recent_value }}</td>
                     <td>{{ mutualFund.recent_date }}</td>
-                    <td><a href="{% url 'portfolio:stock_edit' pk=mutualFund.pk %}"
+                    <td><a href="{% url 'portfolio:mutual_fund_edit' pk=mutualFund.pk %}"
                            class="btn btn-warning">Edit</a></td>
-                    <td><a href="{% url 'portfolio:stock_delete' pk=mutualFund.pk %}"
+                    <td><a href="{% url 'portfolio:mutual_fund_delete' pk=mutualFund.pk %}"
                         onclick="return confirm('Are you sure you want to delete?')"
                         class="btn btn-danger">Delete</a>
                     </td>
