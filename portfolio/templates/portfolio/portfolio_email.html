@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Send Portfolio Information{% endblock %}
+{% block content %}
+
+    <h1>Send report</h1>
+    <p>Enter the e-mail address:</p>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button type="submit">Send</button>
+    </div>
+    <br>
+      <div class="form-actions">
+
+    </div>
+</form>
+{% endblock %}
+</html>

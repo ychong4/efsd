@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'ra@%i$h7kkp2ee&3)#^+)i+oe7k+u=_ee67eg*c-3ju3+t$9b-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,8 +40,14 @@ INSTALLED_APPS = [
     'portfolio',
     'crispy_forms',
     'django.contrib.admin',
-
+    'rest_framework',
+    'mathfilters',
+    'django.contrib.humanize',
 ]
+
+# 4KX8GLVXP4IXASC0
+# 4SMNLSRHLBX0MS4Y
+# 4e861bd00735e50ec70544daf9a4c902
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

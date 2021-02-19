@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'portfolio/base.html' %}
+
+{% block title %}Success{% endblock %}
+{% block content %}
+
+    <h1>Your email has successfully sent!</h1>
+    <br>
+    <div class="form-actions">
+      <a href="{% url "portfolio:home" %}">Back to Home Page</a> &rsaquo;
+    </div>
+</form>
+{% endblock %}
+</html>
